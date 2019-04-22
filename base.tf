@@ -190,6 +190,9 @@ egress {
 
 resource "aws_instance" "nginx1" {
 	
+	
+
+	count = 2
 	ami           = "ami-0a34f2d854bdbd4fb"
 	instance_type = "${lookup(var.instance_type,var.env)}"
 	subnet_id     = "${aws_subnet.subnet1.id}"
@@ -199,7 +202,7 @@ resource "aws_instance" "nginx1" {
 	 
 
 	      tags {
-	   Name = "${var.env}-nginx1"
+	   Name = "${var.env}-${count.index}"
 	  
 	   Environment  = "${var.env}"
 	 }
